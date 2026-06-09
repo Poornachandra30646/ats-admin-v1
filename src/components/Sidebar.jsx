@@ -1,9 +1,7 @@
 import {
   FaTachometerAlt,
   FaUsers,
-  FaFileAlt,
   FaChartBar,
-  FaRobot,
   FaCog,
   FaSignOutAlt
 } from "react-icons/fa";

@@ -24,48 +24,50 @@ function UserDetails() {
 
   useEffect(() => {
 
+    const fetchUserDetails =
+      async () => {
+
+        try {
+
+          setLoading(true);
+
+          const token =
+            localStorage.getItem(
+              "adminToken"
+            );
+
+          const response =
+            await api.get(
+              `/admin/user/${id}`,
+              {
+                headers: {
+                  Authorization:
+                    `Bearer ${token}`
+                }
+              }
+            );
+
+          setData(
+            response.data
+          );
+
+        } catch (error) {
+
+          console.error(
+            error
+          );
+
+        } finally {
+
+          setLoading(false);
+
+        }
+
+      };
+
     fetchUserDetails();
 
   }, [id]);
-
-  const fetchUserDetails =
-    async () => {
-
-      try {
-
-        const token =
-          localStorage.getItem(
-            "adminToken"
-          );
-
-        const response =
-          await api.get(
-            `/admin/user/${id}`,
-            {
-              headers: {
-                Authorization:
-                  `Bearer ${token}`
-              }
-            }
-          );
-
-        setData(
-          response.data
-        );
-
-      } catch (error) {
-
-        console.error(
-          error
-        );
-
-      } finally {
-
-        setLoading(false);
-
-      }
-
-    };
 
   if (loading) {
 
